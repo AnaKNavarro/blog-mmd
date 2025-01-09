@@ -1,12 +1,12 @@
 :root {
-    --primary-color: #7F6DF2;
-    --secondary-color: #88ABF2;
-    --accent-color: #F2E205;
-    --accent-color-2: #F2B705;
-    --accent-color-3: #F29F05;
-    --background-color: #ffffff;
-    --text-color: #2c3e50;
-    --glass-background: #ffffff;
+    --primary-color: #071359;
+    --secondary-color: #0D208C;
+    --accent-color: #060E40;
+    --accent-color-2: #1F4CA6;
+    --accent-color-3: #071359;
+    --background-color: #F2F2F2;
+    --text-color: #060E40;
+    --glass-background: #F2F2F2;
     --glass-border: rgba(136, 171, 242, 0.2);
 }
 
@@ -18,7 +18,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #ffffff;
+    background: #F2F2F2;
     color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
@@ -36,63 +36,159 @@ body {
 .glass-container {
     min-height: 100vh;
     padding: 20px;
-    background: #ffffff;
+    background: #F2F2F2;
     max-width: 1400px;
     margin: 0 auto;
 }
 
-/* Header and Navigation */
+/* Navigation Styles */
 .header {
     position: fixed;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
     z-index: 1000;
-    padding: 20px;
-    width: 100%;
-    max-width: 1400px;
+    padding: 1rem;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.header.nav-hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.header.nav-visible {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
-    background: #ffffff;
-    border-radius: 20px;
+    padding: 0.8rem 1.5rem;
+    background: var(--glass-background);
+    border-radius: 15px;
     border: 1px solid var(--glass-border);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-    font-size: 24px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .logo a {
+    font-size: 1.5rem;
     color: var(--primary-color);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .logo a:hover {
-    color: var(--secondary-color);
+    color: var(--accent-color-2);
+    transform: scale(1.1);
 }
 
-.logo i {
-    font-size: 24px;
-}
-
-.nav-links a {
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
     color: var(--text-color);
-    text-decoration: none;
-    margin-left: 30px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
     transition: color 0.3s ease;
 }
 
+.menu-toggle:hover {
+    color: var(--accent-color-2);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a i {
+    font-size: 1.2rem;
+}
+
 .nav-links a:hover {
-    color: var(--primary-color);
+    color: var(--accent-color-2);
+    background: rgba(31, 76, 166, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Mobile Navigation */
+@media screen and (max-width: 768px) {
+    .nav-container {
+        padding: 0.8rem;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--glass-background);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+        gap: 2rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 900;
+    }
+
+    .nav-links.active {
+        transform: translateX(0);
+    }
+
+    .nav-links a {
+        font-size: 1.2rem;
+        padding: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .nav-links a i {
+        font-size: 1.4rem;
+    }
+}
+
+/* Ajuste para dispositivos muy pequeños */
+@media screen and (max-width: 380px) {
+    .nav-container {
+        padding: 0.6rem;
+    }
+
+    .logo a {
+        font-size: 1.3rem;
+    }
+
+    .menu-toggle {
+        font-size: 1.3rem;
+    }
 }
 
 /* Hero Section */
@@ -193,7 +289,7 @@ body {
     opacity: 0.1;
 }
 
-/* Bento Grid Layout */
+/* Bento Grid y Tarjetas */
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -204,7 +300,7 @@ body {
 }
 
 .bento-item {
-    background: #ffffff;
+    background: var(--glass-background);
     border: 1px solid var(--glass-border);
     border-radius: 15px;
     padding: 30px;
@@ -219,8 +315,13 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
+.bento-item a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
 .bento-item h2 {
-    font-size: 1.5rem;
+    text-align: center;
     margin-bottom: 15px;
     color: var(--accent-color-2);
     transition: color 0.3s ease;
@@ -230,10 +331,45 @@ body {
     color: var(--accent-color-3);
 }
 
+.bento-item h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
 .bento-item p {
     font-size: 1rem;
     opacity: 0.9;
-    color: var(--secondary-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Remove all link decorations from cards */
+.bento-grid a,
+.bento-item a,
+.card a,
+.article-card a {
+    text-decoration: none !important;
+    color: var(--text-color);
+}
+
+.bento-grid a:hover,
+.bento-item a:hover,
+.card a:hover,
+.article-card a:hover {
+    text-decoration: none !important;
+}
+
+/* Ajuste para dispositivos móviles */
+@media screen and (max-width: 768px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+
+    .bento-item {
+        padding: 1.5rem;
+    }
 }
 
 /* Footer */
@@ -393,14 +529,14 @@ body {
 /* Dynamic color scheme based on time of day */
 @media (prefers-color-scheme: dark) {
     :root {
-        --background-color: #ffffff;
-        --text-color: #2c3e50;
+        --background-color: #F2F2F2;
+        --text-color: #060E40;
     }
 }
 
 @media (prefers-color-scheme: light) {
     :root {
-        --background-color: #ffffff;
-        --text-color: #2c3e50;
+        --background-color: #F2F2F2;
+        --text-color: #060E40;
     }
 }

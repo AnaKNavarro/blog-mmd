@@ -49,13 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const root = document.documentElement;
         
         if (hour >= 6 && hour < 18) {
-            // Day mode
-            root.style.setProperty('--background-color', '#f0f5ff');
-            root.style.setProperty('--text-color', '#0a192f');
+            // Light mode
+            root.style.setProperty('--background-color', '#F2F2F2');
+            root.style.setProperty('--text-color', '#060E40');
         } else {
-            // Night mode
-            root.style.setProperty('--background-color', '#0a192f');
-            root.style.setProperty('--text-color', '#e6f1ff');
+            // Dark mode
+            root.style.setProperty('--background-color', '#060E40');
+            root.style.setProperty('--text-color', '#F2F2F2');
         }
     }
 
@@ -67,5 +67,71 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
         heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
+    });
+
+    // Control de la barra de navegación en scroll
+    const header = document.querySelector('.header');
+    let lastScroll = 0;
+    let scrollTimer;
+
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+
+        const currentScroll = window.pageYOffset;
+        const scrollDelta = currentScroll - lastScroll;
+        
+        // No hacemos nada si el scroll es muy pequeño
+        if (Math.abs(scrollDelta) < 10) return;
+
+        // Ocultar nav al hacer scroll hacia abajo
+        if (currentScroll > lastScroll && currentScroll > 100) {
+            header.classList.remove('nav-visible');
+            header.classList.add('nav-hidden');
+        } 
+        // Mostrar nav al hacer scroll hacia arriba
+        else if (currentScroll < lastScroll) {
+            header.classList.remove('nav-hidden');
+            header.classList.add('nav-visible');
+        }
+
+        lastScroll = currentScroll;
+
+        // Mostrar nav después de que el usuario deje de hacer scroll
+        scrollTimer = setTimeout(() => {
+            if (currentScroll < 100) {
+                header.classList.remove('nav-hidden');
+                header.classList.add('nav-visible');
+            }
+        }, 150);
+    });
+
+    // Asegurarnos de que la nav sea visible al cargar la página
+    header.classList.add('nav-visible');
+
+    // Menú hamburguesa
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Cerrar menú al hacer clic en un enlace
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+
+    // Cerrar menú al hacer clic fuera
+    document.addEventListener('click', (e) => {
+        if (navLinks.classList.contains('active') && 
+            !navLinks.contains(e.target) && 
+            !menuToggle.contains(e.target)) {
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     });
 });
