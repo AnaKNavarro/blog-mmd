@@ -37,17 +37,20 @@ body {
     min-height: 100vh;
     padding: 20px;
     background: #ffffff;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 /* Header and Navigation */
 .header {
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1000;
     padding: 20px;
-    background: #ffffff;
+    width: 100%;
+    max-width: 1400px;
 }
 
 .nav-container {
@@ -65,8 +68,20 @@ body {
 
 .logo {
     font-size: 24px;
-    font-weight: 700;
+}
+
+.logo a {
     color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.logo a:hover {
+    color: var(--secondary-color);
+}
+
+.logo i {
+    font-size: 24px;
 }
 
 .nav-links a {
@@ -82,7 +97,9 @@ body {
 
 /* Hero Section */
 .hero-section {
-    background: #ffffff;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -121,33 +138,10 @@ body {
     pointer-events: none;
 }
 
-.hero-3d-element.cube {
-    right: 10%;
-    top: 20%;
-}
-
 .hero-3d-element.sphere {
     left: 10%;
     bottom: 20%;
 }
-
-.cube-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(127, 109, 242, 0.1);
-    border: 2px solid var(--primary-color);
-    transform-style: preserve-3d;
-    backface-visibility: visible;
-    transition: all 0.3s ease;
-}
-
-.cube-face:nth-child(1) { transform: translateZ(150px); }
-.cube-face:nth-child(2) { transform: rotateY(180deg) translateZ(150px); }
-.cube-face:nth-child(3) { transform: rotateY(90deg) translateZ(150px); }
-.cube-face:nth-child(4) { transform: rotateY(-90deg) translateZ(150px); }
-.cube-face:nth-child(5) { transform: rotateX(90deg) translateZ(150px); }
-.cube-face:nth-child(6) { transform: rotateX(-90deg) translateZ(150px); }
 
 .sphere {
     position: relative;
@@ -205,7 +199,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     padding: 20px;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -244,9 +238,10 @@ body {
 
 /* Footer */
 .footer {
+    max-width: 1200px;
+    margin: 40px auto;
     text-align: center;
     padding: 20px;
-    margin-top: 50px;
 }
 
 /* Responsive Design */
