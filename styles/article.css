@@ -51,6 +51,18 @@
     margin-bottom: 10px;
 }
 
+.article-image {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.featured-image {
+    max-width: 50%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 /* Responsive Design for Articles */
 @media (max-width: 992px) {
     .article-content {
