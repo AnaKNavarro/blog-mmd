@@ -1,0 +1,411 @@
+:root {
+    --primary-color: #7F6DF2;
+    --secondary-color: #88ABF2;
+    --accent-color: #F2E205;
+    --accent-color-2: #F2B705;
+    --accent-color-3: #F29F05;
+    --background-color: #ffffff;
+    --text-color: #2c3e50;
+    --glass-background: #ffffff;
+    --glass-border: rgba(136, 171, 242, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #ffffff;
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Glassmorphism Effects */
+.glass-effect {
+    background: var(--glass-background);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.glass-container {
+    min-height: 100vh;
+    padding: 20px;
+    background: #ffffff;
+}
+
+/* Header and Navigation */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 20px;
+    background: #ffffff;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-left: 30px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Hero Section */
+.hero-section {
+    background: #ffffff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    z-index: 1;
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+/* 3D Elements */
+.hero-3d-element {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    animation: float 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.hero-3d-element.cube {
+    right: 10%;
+    top: 20%;
+}
+
+.hero-3d-element.sphere {
+    left: 10%;
+    bottom: 20%;
+}
+
+.cube-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(127, 109, 242, 0.1);
+    border: 2px solid var(--primary-color);
+    transform-style: preserve-3d;
+    backface-visibility: visible;
+    transition: all 0.3s ease;
+}
+
+.cube-face:nth-child(1) { transform: translateZ(150px); }
+.cube-face:nth-child(2) { transform: rotateY(180deg) translateZ(150px); }
+.cube-face:nth-child(3) { transform: rotateY(90deg) translateZ(150px); }
+.cube-face:nth-child(4) { transform: rotateY(-90deg) translateZ(150px); }
+.cube-face:nth-child(5) { transform: rotateX(90deg) translateZ(150px); }
+.cube-face:nth-child(6) { transform: rotateX(-90deg) translateZ(150px); }
+
+.sphere {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: rotateSphere 20s linear infinite;
+}
+
+.sphere-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--secondary-color);
+    border-radius: 50%;
+    transform-style: preserve-3d;
+}
+
+.sphere-ring:nth-child(1) { transform: rotateY(0deg); }
+.sphere-ring:nth-child(2) { transform: rotateY(30deg); }
+.sphere-ring:nth-child(3) { transform: rotateY(60deg); }
+.sphere-ring:nth-child(4) { transform: rotateY(90deg); }
+.sphere-ring:nth-child(5) { transform: rotateX(60deg); }
+.sphere-ring:nth-child(6) { transform: rotateX(30deg); }
+
+/* 3D Card Effect */
+.bento-item {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.6s ease;
+}
+
+.bento-item:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+}
+
+.bento-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 15px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    opacity: 0;
+    transform: translateZ(-1px);
+    transition: opacity 0.3s ease;
+}
+
+.bento-item:hover::before {
+    opacity: 0.1;
+}
+
+/* Bento Grid Layout */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.bento-item {
+    background: #ffffff;
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 30px;
+    cursor: pointer;
+    transform: translateY(0);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bento-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.bento-item h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--accent-color-2);
+    transition: color 0.3s ease;
+}
+
+.bento-item:hover h2 {
+    color: var(--accent-color-3);
+}
+
+.bento-item p {
+    font-size: 1rem;
+    opacity: 0.9;
+    color: var(--secondary-color);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .bento-grid {
+        padding: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .subtitle {
+        font-size: 1.3rem;
+    }
+
+    .nav-container {
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-links a {
+        margin: 5px 0;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+        padding: 0 20px;
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+        padding: 0 20px;
+    }
+
+    .bento-grid {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+
+    .bento-item {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .bento-item h2 {
+        font-size: 1.3rem;
+    }
+
+    .bento-item p {
+        font-size: 0.9rem;
+    }
+
+    .glass-container {
+        padding: 10px;
+    }
+
+    .header {
+        padding: 10px;
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 320px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .bento-item {
+        padding: 15px;
+    }
+
+    .nav-container {
+        padding: 10px;
+    }
+}
+
+/* Ajustes para pantallas grandes */
+@media (min-width: 1400px) {
+    .bento-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        max-width: 1600px;
+    }
+
+    .hero-content h1 {
+        font-size: 4.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.8rem;
+    }
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotateX(45deg) rotateY(45deg);
+    }
+    50% {
+        transform: translateY(-20px) rotateX(45deg) rotateY(45deg);
+    }
+}
+
+@keyframes rotateSphere {
+    0% {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+    100% {
+        transform: rotateY(360deg) rotateX(360deg);
+    }
+}
+
+.parallax-wrapper {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.parallax-element {
+    transform: translateZ(50px);
+    pointer-events: none;
+}
+
+/* Dynamic color scheme based on time of day */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #ffffff;
+        --text-color: #2c3e50;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --background-color: #ffffff;
+        --text-color: #2c3e50;
+    }
+}
